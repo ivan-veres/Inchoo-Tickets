@@ -26,8 +26,8 @@ $table = $this->getConnection()
         ), 'Customer ID')
     ->addColumn(
         'subject',
-        Varien_Db_Ddl_Table::TYPE_TEXT,
-        null,
+        Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        255,
         array(
             'nullable' => false,
         ), 'Subject')
@@ -40,29 +40,33 @@ $table = $this->getConnection()
         ), 'Message')
     ->addColumn(
         'status',
-        Varien_Db_Ddl_Table::TYPE_INTEGER,
-        null,
+        Varien_Db_Ddl_Table::TYPE_TINYINT,
+        1,
         array(
             'nullable' => false,
         ), 'Status')
     ->addColumn(
         'created_at',
-        Varien_Db_Ddl_Table::TYPE_CHAR,
-        25,
+        Varien_Db_Ddl_Table::TYPE_DATETIME,
+        null,
         array(
             'nullable' => false,
-        ), 'Created At')
+        ), 'Creation Time')
     ->addColumn(
         'closed_at',
-        Varien_Db_Ddl_Table::TYPE_CHAR,
-        25,
+        Varien_Db_Ddl_Table::TYPE_DATETIME,
+        null,
         array(
-            'nullable' => false,
-        ), 'Closed At');
+            'nullable' => true,
+        ), 'Closing Time')
+    ->addForeignKey($this->getFkName('inchoo_tickets/tickets', 'customer_id', 'customer/entity', 'entity_id'),
+        'customer_id', $this->getTable('customer/entity'), 'entity_id',
+        Varien_Db_Ddl_Table::ACTION_NO_ACTION, Varien_Db_Ddl_Table::ACTION_CASCADE);
+
 $this->getConnection()->createTable($table);
 
 $table = $this->getConnection()
-    ->newTable($this->getTable('inchoo_tickets/ticket_messages'))
+    ->newTable($this->getTable('inchoo_tickets/messages'))
     ->addColumn(
         'messages_id',
         Varien_Db_Ddl_Table::TYPE_INTEGER,
@@ -97,14 +101,15 @@ $table = $this->getConnection()
             'nullable' => false,
         ), 'Message')
     ->addColumn(
-        'timestamp',
-        Varien_Db_Ddl_Table::TYPE_CHAR,
-        25,
+        'created_at',
+        Varien_Db_Ddl_Table::TYPE_DATETIME,
+        null,
         array(
             'nullable' => false,
-        ), 'Timestamp')
-    ->addForeignKey($this->getFkName('inchoo_tickets/ticket_messages', 'ticket_id', 'inchoo_tickets/tickets', 'ticket_id'),
-        'ticket_id', $this->getTable('inchoo_tickets/tickets'), 'ticket_id');
+        ), 'Creation Time')
+    ->addForeignKey($this->getFkName('inchoo_tickets/messages', 'ticket_id', 'inchoo_tickets/tickets', 'ticket_id'),
+        'ticket_id', $this->getTable('inchoo_tickets/tickets'), 'ticket_id',
+        Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
 
 $this->getConnection()->createTable($table);
 
