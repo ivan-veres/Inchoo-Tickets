@@ -45,11 +45,32 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
 
     public function newAction()
     {
+        $this->loadLayout();
+        $this->_initLayoutMessages('customer/session');
 
+
+        $this->renderLayout();
     }
 
     public function newPostAction()
     {
+        if (!$this->_validateFormKey()) {
+            return $this->_redirect('*/*/');
+        }
 
+        if ($this->getRequest()->isPost()) {
+            $customer = Mage::getSingleton('customer/session')->getCustomer();
+
+            $ticket = Mage::getModel('inchoo_tickets/tickets');
+
+            $data   = $this->getRequest()->getPost();
+
+            $ticket->setData($data);
+
+
+            //$ticket->setData($data)->save();
+
+
+        }
     }
 }

@@ -74,4 +74,9 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
         return Mage::registry('current_ticket');
     }
 
+    public function getFormSaveTicketUrl()
+    {
+        return Mage::getUrl('tickets/ticket/newPost', array('_secure'=>true));
+    }
+
 }
