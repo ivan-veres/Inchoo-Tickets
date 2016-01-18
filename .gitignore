@@ -8,6 +8,11 @@
 !/app/code/local/Inchoo
 /app/code/local/Inchoo/*
 !/app/code/local/Inchoo/Tickets
+!/app/etc
+/app/etc/*
+!/app/etc/modules
+/app/etc/modules/*
+!/app/etc/modules/Inchoo_Tickets.xml
 !/app/design
 /app/design/*
 !/app/design/frontend
