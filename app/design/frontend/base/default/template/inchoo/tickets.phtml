@@ -1,0 +1,42 @@
+
+<?php $_tickets = $this->getTickets(); ?>
+
+<div class="page-title title-buttons">
+    <h1><?php echo $this->__('My Tickets') ?></h1>
+    <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add New Ticket')) ?>" class="button" onclick="window.location='<?php echo $this->getNewTicketUrl() ?>';"><span><span><?php echo $this->__('Add New Ticket') ?></span></span></button>
+</div>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php echo $this->getPagerHtml(); ?>
+<table class="data-table orders" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+    <tr>
+        <th class="number"><?php echo $this->__('Ticket #') ?></th>
+        <th class="date"><?php echo $this->__('Date Opened') ?></th>
+        <th class="ship"><?php echo $this->__('Subject') ?></th>
+        <th class="total"><span class="nobr"><?php echo $this->__('Status') ?></span></th>
+        <th class="status"><span class="nobr"><?php echo $this->__('Date Closed') ?></span></th>
+        <th class="view">&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php $_odd = ''; ?>
+    <?php foreach ($_tickets as $_ticket): ?>
+        <tr>
+            <td class="number"><?php echo $_ticket->getTicketId() ?></td>
+            <td class="date"><span class="nobr"><?php echo $this->formatDate($_ticket->getCreatedAt()) ?></span></td>
+            <td class="ship"><?php echo $_ticket->getSubject(); ?></td>
+            <td class="total a-center"><?php echo $_ticket->getStatus() ? 'Opened' : 'Closed'; ?></td>
+            <td class="status a-center"><?php echo $_ticket->getClosedAt() ? $this->formatDate($_ticket->getClosedAt()) : '-'; ?></td>
+            <td class="a-center view">
+                <span class="nobr"><a href="<?php echo $this->getViewUrl($_ticket) ?>"><?php echo $this->__('View Ticket') ?></a></span>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
