@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<layout>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" module="inchoo_tickets">
+                <name>tickets</name>
+                <url>inchoo_tickets</url>
+                <title>My Tickets</title>
+            </action>
+        </reference>
+    </customer_account>
+
+    <inchoo_tickets_index_index>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/tickets.phtml"/>
+
+            <!--<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>-->
+        </reference>
+    </inchoo_tickets_index_index>
+
+    <inchoo_tickets_ticket_view>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/viewTicket.phtml"/>
+        </reference>
+    </inchoo_tickets_ticket_view>
+
+    <inchoo_tickets_ticket_new>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/newTicket.phtml"/>
+        </reference>
+    </inchoo_tickets_ticket_new>
+
+    <inchoo_tickets_message_new>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/newMessage.phtml"/>
+        </reference>
+    </inchoo_tickets_message_new>
+
+</layout>
