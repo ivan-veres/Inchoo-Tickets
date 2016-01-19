@@ -23,21 +23,21 @@
     <inchoo_tickets_ticket_view>
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
-            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/viewTicket.phtml"/>
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/ticket/view.phtml"/>
         </reference>
     </inchoo_tickets_ticket_view>
 
     <inchoo_tickets_ticket_new>
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
-            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/newTicket.phtml"/>
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/form/ticket.phtml"/>
         </reference>
     </inchoo_tickets_ticket_new>
 
     <inchoo_tickets_message_new>
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
-            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/newMessage.phtml"/>
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/form/message.phtml"/>
         </reference>
     </inchoo_tickets_message_new>
 
