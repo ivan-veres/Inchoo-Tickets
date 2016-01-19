@@ -1,6 +1,5 @@
 
 <?php $_tickets = $this->getTickets(); ?>
-
 <div class="page-title title-buttons">
     <h1><?php echo $this->__('My Tickets') ?></h1>
     <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add New Ticket')) ?>" class="button" onclick="window.location='<?php echo $this->getNewTicketUrl() ?>';"><span><span><?php echo $this->__('Add New Ticket') ?></span></span></button>
@@ -25,7 +24,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php $_odd = ''; ?>
+
     <?php foreach ($_tickets as $_ticket): ?>
         <tr>
             <td class="number"><?php echo $_ticket->getTicketId() ?></td>

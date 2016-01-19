@@ -24,8 +24,6 @@
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
             <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/viewTicket.phtml"/>
-
-            <!--<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>-->
         </reference>
     </inchoo_tickets_ticket_view>
 
@@ -33,9 +31,14 @@
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
             <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/newTicket.phtml"/>
-
-            <!--<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>-->
         </reference>
     </inchoo_tickets_ticket_new>
+
+    <inchoo_tickets_message_new>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="inchoo_tickets/tickets" name="tickets" template="inchoo/newMessage.phtml"/>
+        </reference>
+    </inchoo_tickets_message_new>
 
 </layout>

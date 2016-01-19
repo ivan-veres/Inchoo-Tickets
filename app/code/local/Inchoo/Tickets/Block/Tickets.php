@@ -38,7 +38,7 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
         $messages = Mage::getModel('inchoo_tickets/messages')->getCollection()
             ->addFieldToSelect('*')
             ->addFieldToFilter('ticket_id', $ticket->getTicketId())
-            ->setOrder('timestamp', 'asc')
+            ->setOrder('created_at', 'asc')
         ;
 
         return $messages;
@@ -59,6 +59,11 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
         return $this->getUrl('*/message/new', array('_secure' => true));
     }
 
+    public function getCloseTicketUrl($ticketId)
+    {
+        return $this->getUrl('*/*/closePost', array('_secure' => true, 'ticket_id' => $ticketId));
+    }
+
     public function getPagerHtml()
     {
         return $this->getChildHtml('pager');
@@ -77,6 +82,21 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
     public function getFormSaveTicketUrl()
     {
         return Mage::getUrl('tickets/ticket/newPost', array('_secure'=>true));
+    }
+
+    public function getFormSaveMessageUrl()
+    {
+        return Mage::getUrl('tickets/message/newPost', array('_secure'=>true));
+    }
+
+    public function getBackUrl()
+    {
+        return $this->getUrl('tickets', array('_secure'=>true));
+    }
+
+    public function getBackToTicketUrl()
+    {
+        return $this->getUrl('tickets/ticket/view', array('_secure'=>true, 'ticket_id' => Mage::getSingleton('customer/session')->getTicket()->getTicketId()));
     }
 
 }

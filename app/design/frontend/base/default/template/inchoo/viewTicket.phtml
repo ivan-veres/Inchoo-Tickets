@@ -5,7 +5,10 @@
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <div class="page-title title-buttons">
     <h1><?php echo $this->__('Ticket #%s - %s', $_ticket->getTicketId(), $_ticket->getStatus() ? 'Opened' : 'Closed') ?></h1>
-    <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Reply')) ?>" class="button" onclick="window.location='<?php echo $this->getNewMessageUrl() ?>';"><span><span><?php echo $this->__('Reply') ?></span></span></button>
+    <?php if ($_ticket->getStatus()): ?>
+        <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Reply')) ?>" class="button" style="right: 135px" onclick="window.location='<?php echo $this->getNewMessageUrl() ?>';"><span><span><?php echo $this->__('Reply') ?></span></span></button>
+        <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Close Ticket')) ?>" class="button" onclick="window.location='<?php echo $this->getCloseTicketUrl($_ticket->getTicketId()) ?>';"><span><span><?php echo $this->__('Close Ticket') ?></span></span></button>
+    <?php endif ?>
 </div>
 <dl class="order-info">
     <dt><?php echo $this->__('About This Ticket:') ?></dt>
@@ -19,17 +22,27 @@
 <p class="order-date"><?php echo $this->__('Date Created: %s', $this->formatDate($_ticket->getCreatedAt(), 'medium', true)) ?></p>
 <div class="">
     <div class="box">
-        <h2><?php echo $_ticket->getSubject(); ?></h2>
+        <h2><?php echo $this->escapeHtml($_ticket->getSubject()); ?></h2>
     </div>
     <div class="box-content">
-        <address><?php echo $_ticket->getMessage(); ?></address>
+        <p><?php echo $this->escapeHtml($_ticket->getMessage()); ?></p>
     </div>
 </div>
-<div>
-    <?php foreach($_messages as $_message): ?>
-        <div>
-            <p><?php echo $_message->getMessage(); ?></p>
-        </div>
-    <?php endforeach ?>
+
+<?php foreach($_messages as $_message): ?>
+    <div style="margin-top: 10px; border-top: 1px solid rgb(237, 237, 237); padding-top: 10px">
+            <?php if (!$_message->getAdminId()): ?>
+                <p><strong>Me:</strong></p>
+            <?php else: ?>
+                <p><strong>Admin:</strong></p>
+            <?php endif ?>
+            <div>
+                <p><?php echo $_message->getMessage(); ?></p>
+            </div>
+    </div>
+<?php endforeach ?>
+
+<div class="buttons-set">
+    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
 </div>
 

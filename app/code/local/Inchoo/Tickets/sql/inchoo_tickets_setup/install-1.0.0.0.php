@@ -46,6 +46,15 @@ $table = $this->getConnection()
             'nullable' => false,
         ), 'Status')
     ->addColumn(
+        'store_id',
+        Varien_Db_Ddl_Table::TYPE_SMALLINT,
+        null,
+        array(
+            'unsigned' => true,
+            'nullable' => false,
+            'default'  => '0',
+        ), 'Store ID')
+    ->addColumn(
         'created_at',
         Varien_Db_Ddl_Table::TYPE_DATETIME,
         null,
