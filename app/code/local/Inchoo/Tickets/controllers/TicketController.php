@@ -40,8 +40,10 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
 
     protected function _canViewTicket($ticket)
     {
+        $websiteId = Mage::app()->getWebsite()->getId();
         $customerId = Mage::getSingleton('customer/session')->getCustomerId();
-        if ($ticket->getTicketId() && $ticket->getCustomerId() && ($customerId === $ticket->getCustomerId())) {
+        if ($ticket->getTicketId() && $ticket->getCustomerId() && ($customerId === $ticket->getCustomerId())
+                && ($ticket->getWebsiteId() === $websiteId)) {
             return true;
         } else {
             return false;

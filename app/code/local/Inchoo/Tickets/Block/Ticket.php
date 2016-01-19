@@ -1,7 +1,7 @@
 <?php
 
 
-class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
+class Inchoo_Tickets_Block_Ticket extends Mage_Core_Block_Template
 {
     public function __construct()
     {
@@ -26,6 +26,7 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
         $tickets = Mage::getModel('inchoo_tickets/tickets')->getCollection()
             ->addFieldToSelect('*')
             ->addFieldToFilter('customer_id', Mage::getSingleton('customer/session')->getCustomer()->getId())
+            ->addFieldToFilter('website_id', Mage::app()->getWebsite()->getId())
             ->setOrder('created_at', 'desc')
         ;
 
