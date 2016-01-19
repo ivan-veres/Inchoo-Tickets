@@ -92,7 +92,7 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
                     $ticket->setCustomerID($customer->getId())
                         ->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_ENABLED)
                         ->setCreatedAt($currentTime)
-                        ->setStoreId(Mage::app()->getStore()->getId())
+                        ->setWebsiteId(Mage::app()->getWebsite()->getId())
                         ->save();
 
                     $session->addSuccess($this->__('Your ticket has been submitted.'));

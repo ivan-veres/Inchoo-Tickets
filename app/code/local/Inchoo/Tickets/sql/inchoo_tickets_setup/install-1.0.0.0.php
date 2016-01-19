@@ -46,7 +46,7 @@ $table = $this->getConnection()
             'nullable' => false,
         ), 'Status')
     ->addColumn(
-        'store_id',
+        'website_id',
         Varien_Db_Ddl_Table::TYPE_SMALLINT,
         null,
         array(
