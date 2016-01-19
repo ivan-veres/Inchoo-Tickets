@@ -18,7 +18,7 @@
         <layout>
             <updates>
                 <inchoo_tickets>
-                    <file>tickets.xml</file>
+                    <file>inchoo/tickets.xml</file>
                 </inchoo_tickets>
             </updates>
         </layout>

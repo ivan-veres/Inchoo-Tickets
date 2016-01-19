@@ -2,7 +2,7 @@
     <h1>Submit New Ticket</h1>
 </div>
 <?php echo $this->getMessagesBlock()->toHtml() ?>
-<form action="<?php echo $this->getFormSaveTicketUrl() ?>" method="post" id="form-validate">
+<form action="<?php echo $this->getFormSaveTicketUrl() ?>" method="post" id="ticket-form">
     <div class="fieldset">
         <?php echo $this->getBlockHtml('formkey')?>
         <input type="hidden" name="success_url" value="<?php //echo $this->getSuccessUrl() ?>" />
@@ -27,3 +27,8 @@
         <button data-action="save-customer-message" type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit Ticket')) ?>" class="button"><span><span><?php echo $this->__('Submit Ticket') ?></span></span></button>
     </div>
 </form>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('ticket-form', true);
+    //]]>
+</script>

@@ -2,7 +2,7 @@
     <h1>Reply to ticket</h1>
 </div>
 <?php echo $this->getMessagesBlock()->toHtml() ?>
-<form action="<?php echo $this->getFormSaveMessageUrl() ?>" method="post" id="form-validate">
+<form action="<?php echo $this->getFormSaveMessageUrl() ?>" method="post" id="message-form">
     <div class="fieldset">
         <?php echo $this->getBlockHtml('formkey')?>
         <input type="hidden" name="success_url" value="<?php //echo $this->getSuccessUrl() ?>" />
@@ -23,3 +23,8 @@
         <button data-action="save-customer-message" type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit Message')) ?>" class="button"><span><span><?php echo $this->__('Submit Message') ?></span></span></button>
     </div>
 </form>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('message-form', true);
+    //]]>
+</script>
