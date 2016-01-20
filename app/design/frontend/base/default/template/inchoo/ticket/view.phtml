@@ -14,7 +14,7 @@
     <dt><?php echo $this->__('About This Ticket:') ?></dt>
     <dd>
         <ul id="order-info-tabs">
-            <li class="current">Ticket Information</li>
+            <li class="current">Ticket Messages</li>
         </ul>
 <!--        <script type="text/javascript">decorateGeneric($('order-info-tabs').select('LI'),['first','last']);</script>-->
     </dd>
@@ -36,6 +36,7 @@
             <?php else: ?>
                 <p><strong>Admin:</strong></p>
             <?php endif ?>
+            <small><?php echo $this->formatDate($_message->getCreatedAt(), 'medium', true) ?></small>
             <div>
                 <p><?php echo $_message->getMessage(); ?></p>
             </div>
