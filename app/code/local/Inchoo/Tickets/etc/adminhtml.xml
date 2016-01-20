@@ -5,7 +5,7 @@
             <children>
                 <inchoo_tickets translate="title" module="inchoo_tickets">
                     <title>Tickets</title>
-                    <action>adminhtml/inchoo_tickets/index</action>
+                    <action>adminhtml/tickets/index</action>
                     <sort_order>200</sort_order>
                 </inchoo_tickets>
             </children>

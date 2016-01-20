@@ -59,4 +59,15 @@
             </inchoo_tickets_setup>
         </resources>
     </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Inchoo_Tickets before="Mage_Adminhtml">Inchoo_Tickets_Adminhtml</Inchoo_Tickets>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>
