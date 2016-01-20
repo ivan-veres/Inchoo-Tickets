@@ -4,7 +4,7 @@
 <?php $_messages = $this->getMessages(); ?>
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <div class="page-title title-buttons">
-    <h1><?php echo $this->__('Ticket #%s - %s', $_ticket->getTicketId(), $_ticket->getStatus() ? 'Opened' : 'Closed') ?></h1>
+    <h1><?php echo $this->__('Ticket #%s - %s', $_ticket->getTicketId(), $_ticket->getStatus() ? $this->__('Opened') : $this->__('Closed - %s', $this->formatDate($_ticket->getClosedAt(), 'medium', true))) ?></h1>
     <?php if ($_ticket->getStatus()): ?>
         <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Reply')) ?>" class="button" style="right: 135px" onclick="window.location='<?php echo $this->getNewMessageUrl() ?>';"><span><span><?php echo $this->__('Reply') ?></span></span></button>
         <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Close Ticket')) ?>" class="button" onclick="window.location='<?php echo $this->getCloseTicketUrl($_ticket->getTicketId()) ?>';"><span><span><?php echo $this->__('Close Ticket') ?></span></span></button>
@@ -19,7 +19,7 @@
 <!--        <script type="text/javascript">decorateGeneric($('order-info-tabs').select('LI'),['first','last']);</script>-->
     </dd>
 </dl>
-<p class="order-date"><?php echo $this->__('Date Created: %s', $this->formatDate($_ticket->getCreatedAt(), 'medium', true)) ?></p>
+<p class="order-date"><?php echo $this->__('Date Created: %s', $this->formatDate($_ticket->getCreatedAt(), 'medium', true))?></p>
 <div class="">
     <div class="box">
         <h2><?php echo $this->escapeHtml($_ticket->getSubject()); ?></h2>
