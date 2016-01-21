@@ -4,14 +4,14 @@
 class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Adminhtml_Block_Template
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
-
     protected $_ticket;
 
     public function _construct()
-    {
-        parent::_construct();
-        $this->setTemplate('inchoo/messages.phtml');
-    }
+{
+    parent::_construct();
+    $this->setTemplate('inchoo/ticket/view/messages.phtml');
+}
+
     public function getTicket()
     {
         if (!$this->_ticket) {
@@ -33,7 +33,7 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     public function getTicketCreator()
     {
         $creator = Mage::getModel('customer/customer')
-            ->load($this->getTicket()->getCustomerId());
+        ->load($this->getTicket()->getCustomerId());
 
         return $creator;
     }
@@ -56,7 +56,7 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     {
         return Mage::helper('inchoo_tickets')->__('Ticket Messages');
     }
-    
+
     public function canShowTab()
     {
         return true;
