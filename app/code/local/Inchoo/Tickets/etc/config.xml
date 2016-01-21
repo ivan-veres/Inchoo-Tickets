@@ -70,4 +70,13 @@
             </adminhtml>
         </routers>
     </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <inchoo_tickets>
+                    <file>inchoo/tickets.xml</file>
+                </inchoo_tickets>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>

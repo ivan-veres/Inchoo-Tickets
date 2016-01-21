@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <layout>
 
-    <adminhtml_tickets_index>
+    <adminhtml_tickets_view>
 
         <reference name="left">
-            <block type="inchoo_tickets/adminhtml_ticket_view_tabs">
-
+            <block type="inchoo_tickets/adminhtml_ticket_view_tabs" name="inchoo_ticket_view_tabs">
+                <block type="inchoo_tickets/adminhtml_ticket_view_tab_messages" name="inchoo_ticket_view_tab_messages" />
+                <action method="addTab"><name>view_section</name><block>inchoo_ticket_view_tab_messages</block></action>
             </block>
         </reference>
-    </adminhtml_tickets_index>
+        <reference name="content">
+            <block type="inchoo_tickets/adminhtml_ticket_view" name="inchoo_ticket_view" />
+        </reference>
 
+    </adminhtml_tickets_view>
 </layout>

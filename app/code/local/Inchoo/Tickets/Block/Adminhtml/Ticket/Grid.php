@@ -15,9 +15,8 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Wi
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getResourceModel('inchoo_tickets/tickets_collection')
-        ;
-
+        $collection = Mage::getModel('inchoo_tickets/tickets')
+            ->getCollection();
         $this->setCollection($collection);
 
         parent::_prepareCollection();

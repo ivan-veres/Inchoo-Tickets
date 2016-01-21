@@ -1,7 +1,7 @@
 <?php
 
 
-class Inchoo_Tickets_Adminhtml_Block_Ticket_View_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
+class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
 {
     public function __construct()
     {

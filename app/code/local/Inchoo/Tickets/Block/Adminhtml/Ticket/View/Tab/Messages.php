@@ -1,7 +1,7 @@
 <?php
 
 
-class Inchoo_Tickets_Adminhtml_Block_Ticket_View_Tab_Messages extends Mage_Adminhtml_Block_Template
+class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Adminhtml_Block_Template
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
     protected function _construct()
