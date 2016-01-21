@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<layout>
+
+    <adminhtml_tickets_index>
+
+        <reference name="left">
+            <block type="inchoo_tickets/adminhtml_ticket_view_tabs">
+
+            </block>
+        </reference>
+    </adminhtml_tickets_index>
+
+</layout>
