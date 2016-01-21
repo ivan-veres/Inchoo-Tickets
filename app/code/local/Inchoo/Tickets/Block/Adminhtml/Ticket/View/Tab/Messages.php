@@ -56,12 +56,7 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     {
         return Mage::helper('inchoo_tickets')->__('Ticket Messages');
     }
-
-    public function getTabUrl()
-    {
-        return $this->getUrl('*/*/messages', array('_current' => true));
-    }
-
+    
     public function canShowTab()
     {
         return true;
@@ -70,5 +65,10 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     public function isHidden()
     {
         return false;
+    }
+
+    public function getTabClass()
+    {
+        return 'ajax only';
     }
 }
