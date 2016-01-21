@@ -10,12 +10,4 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tabs extends Mage_Adminhtml_Blo
         $this->setDestElementId('tickets_ticket_view');
         $this->setTitle(Mage::helper('inchoo_tickets')->__('Ticket View'));
     }
-
-    public function getOrder()
-    {
-        /**
-         * TODO:
-         */
-        return null;
-    }
 }

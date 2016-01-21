@@ -7,4 +7,9 @@ class Inchoo_Tickets_Model_Resource_Messages_Collection extends Mage_Core_Model_
     {
         $this->_init('inchoo_tickets/messages');
     }
+
+    protected function _addCustomerNames()
+    {
+
+    }
 }

@@ -3,15 +3,28 @@
 
     <adminhtml_tickets_view>
 
-        <reference name="left">
-            <block type="inchoo_tickets/adminhtml_ticket_view_tabs" name="inchoo_ticket_view_tabs">
-                <block type="inchoo_tickets/adminhtml_ticket_view_tab_messages" name="inchoo_ticket_view_tab_messages" />
-                <action method="addTab"><name>view_section</name><block>inchoo_ticket_view_tab_messages</block></action>
+        <reference name="content">
+            <block type="inchoo_tickets/adminhtml_ticket_view" name="inchoo_ticket_view" template="widget/view/container.phtml">
+                <action method="setDestElementId"><value>ticket_view</value></action>
             </block>
         </reference>
-        <reference name="content">
-            <block type="inchoo_tickets/adminhtml_ticket_view" name="inchoo_ticket_view" />
+        <reference name="left">
+            <block type="adminhtml/widget_tabs" name="inchoo_ticket_view_tabs">
+                <action method="setDestElementId">
+                    <value>ticket_view</value>
+                </action>
+                <action method="setTitle" translate="value">
+                    <value>Ticket View</value>
+                </action>
+                <action method="setId">
+                    <value>inchoo_ticket_view_tabs</value>
+                </action>
+                <block type="inchoo_tickets/adminhtml_ticket_view_tab_messages" name="inchoo_ticket_view_tab_messages" template="inchoo/messages.phtml"/>
+                <action method="addTab">
+                    <name>view_tab</name>
+                    <block>inchoo_ticket_view_tab_messages</block>
+                </action>
+            </block>
         </reference>
-
     </adminhtml_tickets_view>
 </layout>
