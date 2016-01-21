@@ -25,13 +25,7 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $this->renderLayout();
     }
 
-    public function gridAction()
-    {
-        $this->loadLayout();
-        $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('inchoo_tickets/adminhtml_grid')->toHtml()
-        );
-    }
+    
 
     public function viewAction()
     {

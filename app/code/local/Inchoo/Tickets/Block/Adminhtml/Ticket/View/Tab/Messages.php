@@ -5,6 +5,8 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
 
+    protected $_ticket;
+
     public function _construct()
     {
         parent::_construct();
@@ -12,25 +14,37 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     }
     public function getTicket()
     {
-        return Mage::registry('current_ticket');
+        if (!$this->_ticket) {
+            return $this->_ticket = Mage::registry('current_ticket');
+        }
+
+        return $this->_ticket;
     }
 
     public function getTicketMessages()
     {
         $messages = Mage::getModel('inchoo_tickets/messages')->getCollection()
             ->addFieldToFilter('ticket_id', $this->getTicket()->getTicketId())
-            ->setOrder('created_at', 'desc');
+            ->setOrder('created_at', 'asc');
 
         return $messages;
     }
 
     public function getTicketCreator()
     {
-        $ticket = $this->getTicket();
         $creator = Mage::getModel('customer/customer')
-            ->load($ticket->getCustomerId());
+            ->load($this->getTicket()->getCustomerId());
 
         return $creator;
+    }
+
+    public function getAdminFirstname($adminId)
+    {
+        $adminFirstname = Mage::getModel('admin/user')
+            ->load($adminId)
+            ->getFirstname();
+
+        return $adminFirstname;
     }
 
     public function getTabLabel()

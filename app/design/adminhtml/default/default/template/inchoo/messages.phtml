@@ -1,0 +1,18 @@
+<?php $_ticket = $this->getTicket() ?>
+<?php $_messages = $this->getTicketMessages() ?>
+
+<div class="entry-edit">
+    <fieldset>
+        <ul class="note-list">
+            <p><strong><?php echo $_ticket->getMessage() ?></strong></p>
+            <?php foreach ($_messages as $_message): ?>
+                <li>
+                    <strong><?php echo $this->formatDate($_message->getCreatedAt(), 'medium') ?></strong>
+                    <?php echo $this->formatTime($_message->getCreatedAt()) ?><span class="separator">|</span>
+                    <small><?php echo $_message->getAdminId() ? $this->getAdminFirstname($_message->getAdminId()) : $this->helper('sales')->__('Customer') ?></small>
+                        <br/><?php echo $_message->getMessage() ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </fieldset>
+</div>

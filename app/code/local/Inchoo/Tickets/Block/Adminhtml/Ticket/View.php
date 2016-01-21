@@ -16,22 +16,6 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
         $this->_removeButton('reset');
         $this->setId('tickets_ticket_view');
 
-        $this->_addButton('close', array(
-            'label'     => Mage::helper('adminhtml')->__('Close'),
-            'class'     => 'delete',
-            'onclick'   => 'deleteConfirm(\''
-                . Mage::helper('core')->jsQuoteEscape(
-                    Mage::helper('adminhtml')->__('Are you sure you want to do this?')
-                )
-                .'\', \''
-                . $this->getDeleteUrl()
-                . '\')',
-        ));
-
-    }
-
-    protected function _prepareLayout()
-    {
         $this->_addButton('back', array(
             'label'     => Mage::helper('adminhtml')->__('Back'),
             'onclick'   => "setLocation('{$this->getUrl('*/*/')}')",
@@ -46,17 +30,15 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
                     Mage::helper('adminhtml')->__('Are you sure you want to do this?')
                 )
                 .'\', \''
-                . $this->getDeleteUrl()
+                . $this->getCloseUrl()
                 . '\')',
         ));
-
-        return parent::_prepareLayout();
     }
 
     protected function _beforeToHtml()
     {
         $ticket = $this->getTicket();
-        $this->_headerText = Mage::helper('inchoo_tickets')->__('Ticket # %s', $ticket->getTicketId());
+        $this->_headerText = Mage::helper('inchoo_tickets')->__('Ticket #%s - %s', $ticket->getTicketId(), $ticket->getSubject());
         $this->setViewHtml('<div id="' . $this->getDestElementId() . '"></div>');
         return parent::_beforeToHtml();
     }
@@ -64,6 +46,11 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
     public function getTicket()
     {
         return Mage::registry('current_ticket');
+    }
+
+    protected function getCloseUrl()
+    {
+        return $this->getUrl('*/*/close', array('ticket_id' => $this->getTicket()->getTicketId()));
     }
 
 }
