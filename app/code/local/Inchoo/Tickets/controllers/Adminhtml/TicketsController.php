@@ -44,28 +44,29 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
     public function closeAction()
     {
         $_session = Mage::getSingleton('adminhtml/session');
-        $ticketId = $this->getRequest()->getParam('ticket_id');
-        if ($ticketId > 0) {
+        $_ticketId = $this->getRequest()->getParam('ticket_id');
+
+        if (!$_ticketId) {
             try {
                 $currentTime = Varien_Date::now();
-                Mage::getModel('inchoo_tickets/tickets')->load($ticketId)
+                Mage::getModel('inchoo_tickets/tickets')->load($_ticketId)
                     ->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_DISABLED)
                     ->setClosedAt($currentTime)
                     ->save();
                 $_session->addSuccess(
-                    Mage::helper('inchoo_tickets')->__('Ticket was successfully closed.')
+                    Mage::helper('inchoo_tickets')->__('Ticket #%s was successfully closed.', $_ticketId)
                 );
                 $this->_redirect('*/*/');
                 return;
             } catch (Mage_Core_Exception $e) {
                 $_session->addError($e->getMessage());
-                $this->_redirect('*/*/view', array('ticket_id' => $ticketId));
+                $this->_redirect('*/*/view', array('ticket_id' => $_ticketId));
             } catch (Exception $e) {
                 Mage::logException($e);
                 $_session->addError(
                     Mage::helper('inchoo_tickets/tickets')->__('There was an error closing the ticket.')
                 );
-                $this->_redirect('*/*/view', array('ticket_id' => $ticketId));
+                $this->_redirect('*/*/view', array('ticket_id' => $_ticketId));
                 return;
             }
         }

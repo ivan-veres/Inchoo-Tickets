@@ -15,6 +15,7 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
         $this->_removeButton('delete');
         $this->_removeButton('reset');
         $this->setId('tickets_ticket_view');
+        $_ticket = $this->getTicket();
 
         $this->_addButton('back', array(
             'label'     => Mage::helper('adminhtml')->__('Back'),
@@ -22,17 +23,19 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
             'class'     => 'back',
         ));
 
-        $this->_addButton('close', array(
-            'label'     => Mage::helper('adminhtml')->__('Close'),
-            'class'     => 'delete',
-            'onclick'   => 'deleteConfirm(\''
-                . Mage::helper('core')->jsQuoteEscape(
-                    Mage::helper('adminhtml')->__('Are you sure you want to do this?')
-                )
-                .'\', \''
-                . $this->getCloseUrl()
-                . '\')',
-        ));
+        if ($_ticket->canClose()) {
+            $this->_addButton('close', array(
+                'label'     => Mage::helper('adminhtml')->__('Close'),
+                'class'     => 'delete',
+                'onclick'   => 'deleteConfirm(\''
+                    . Mage::helper('core')->jsQuoteEscape(
+                        Mage::helper('adminhtml')->__('Are you sure you want to do this?')
+                    )
+                    .'\', \''
+                    . $this->getCloseUrl()
+                    . '\')',
+            ));
+        }
     }
 
     protected function _beforeToHtml()
