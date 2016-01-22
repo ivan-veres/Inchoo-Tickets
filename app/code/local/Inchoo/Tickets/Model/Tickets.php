@@ -29,4 +29,12 @@ class Inchoo_Tickets_Model_Tickets extends Mage_Core_Model_Abstract
 
         return $errors;
     }
+
+    public function canClose()
+    {
+        if (!$this->getStatus()) {
+            return false;
+        }
+        return true;
+    }
 }
