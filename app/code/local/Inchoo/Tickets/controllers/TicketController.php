@@ -118,25 +118,31 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
     {
         $session = Mage::getSingleton('core/session');
         $ticketId = $this->getRequest()->getParam('ticket_id');
-        $ticket = Mage::getModel('inchoo_tickets/tickets')->load($ticketId);
+        $_ticket = Mage::getModel('inchoo_tickets/tickets')->load($ticketId);
 
 
         if (!$ticketId) {
             $session->addError($this->__('Unable to close ticket!'));
-        } else {
+            $this->_redirect('*/*/');
+            return;
+        }
+
+        if ($_ticket->getStatus()) {
             try {
                 $currentTime = Varien_Date::now();
-                $ticket->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_DISABLED)
+                $_ticket->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_DISABLED)
                     ->setClosedAt($currentTime)
                     ->save();
-
-                $session->addSuccess($this->__('Ticket has been closed.'));
+                $session->addSuccess($this->__('Ticket #%s has been closed.', $_ticket->getTicketId()));
             } catch (Exception $e) {
-                $session->addError($this->__('Unable to close ticket!'));
+                $session->addError($this->__('Something went wrong.'));
+                $this->_redirect('*/*/');
+                return;
             }
         }
 
-        $this->_redirectReferer();
+        $this->_redirect('*/');
+        return;
     }
 
     protected function _getSession()
