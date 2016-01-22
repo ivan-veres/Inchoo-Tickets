@@ -23,7 +23,7 @@ class Inchoo_Tickets_Model_Tickets extends Mage_Core_Model_Abstract
             $errors[] = Mage::helper('inchoo_tickets')->__('Message can\'t be empty');
         }
 
-        if (empty($errors))  {
+        if (empty($errors)) {
             return true;
         }
 
@@ -33,6 +33,14 @@ class Inchoo_Tickets_Model_Tickets extends Mage_Core_Model_Abstract
     public function canClose()
     {
         if (!$this->getStatus()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function canReply()
+    {
+        if ($this->getStatus()) {
             return false;
         }
         return true;
