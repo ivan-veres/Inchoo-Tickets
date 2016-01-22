@@ -127,7 +127,7 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
             return;
         }
 
-        if ($_ticket->getStatus()) {
+        if ($_ticket->canClose()) {
             try {
                 $currentTime = Varien_Date::now();
                 $_ticket->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_DISABLED)
