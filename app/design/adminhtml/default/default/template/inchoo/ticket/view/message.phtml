@@ -1,0 +1,26 @@
+<?php $_ticket = $this->getTicket() ?>
+
+<?php if ($_ticket->canReply()):?>
+    <div>
+        <div class="entry-edit-head">
+            <h4 class="icon-head"><?php echo Mage::helper('inchoo_tickets')->__('Send Message') ?></h4>
+        </div>
+        <fieldset>
+            <span class="field-row">
+                <label class="normal" for="ticket_message"><?php echo Mage::helper('inchoo_tickets')->__('Message') ?></label>
+                <textarea name="message" rows="3" cols="5" style="height:6em; width:99%;"
+                          id="ticket_message"></textarea>
+            </span>
+            <?php //<div class="f-left"> ?>
+                <?php //if ($this->canSendMessageEmail()): ?><?php //TODO: send email to customer when message is submited ?>
+                        <?php //<input name="ticket[is_customer_notified]" type="checkbox" id="ticket_notify" value="1" /><label class="normal" for="ticket_notify"> <?php echo Mage::helper('sales')->__('Notify Customer by Email') </label><br /> ?>
+                    <?php //endif; ?>
+            <?php //</div> ?>
+            <div class="f-right">
+                <?php echo $this->getChildHtml('submit_button') ?>
+            </div>
+        </fieldset>
+        <div class="clear"></div>
+    </div>
+<?php endif;?>
+
