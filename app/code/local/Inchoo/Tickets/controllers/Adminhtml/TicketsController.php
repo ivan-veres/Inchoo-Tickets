@@ -47,7 +47,7 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $_session = Mage::getSingleton('adminhtml/session');
         $_ticketId = $this->getRequest()->getParam('ticket_id');
 
-        if (!$_ticketId) {
+        if ($_ticketId) {
             try {
                 $currentTime = Varien_Date::now();
                 Mage::getModel('inchoo_tickets/tickets')->load($_ticketId)
@@ -65,14 +65,14 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
             } catch (Exception $e) {
                 Mage::logException($e);
                 $_session->addError(
-                    Mage::helper('inchoo_tickets/tickets')->__('There was an error closing the ticket.')
+                    Mage::helper('inchoo_tickets')->__('There was an error closing the ticket.')
                 );
                 $this->_redirect('*/*/view', array('ticket_id' => $_ticketId));
                 return;
             }
         }
         $_session->addError(
-            Mage::helper('inchoo_tickets/tickets')->__('Could not find the ticket.')
+            Mage::helper('inchoo_tickets')->__('Could not find the ticket.')
         );
     }
 
