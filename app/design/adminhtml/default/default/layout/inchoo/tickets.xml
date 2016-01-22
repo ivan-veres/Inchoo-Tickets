@@ -20,7 +20,9 @@
                     <value>inchoo_ticket_view_tabs</value>
                 </action>
                 <block type="inchoo_tickets/adminhtml_ticket_view_tab_info" name="inchoo_ticket_view_tab_info" />
-                <block type="inchoo_tickets/adminhtml_ticket_view_tab_messages" name="inchoo_ticket_view_tab_messages" />
+                <block type="inchoo_tickets/adminhtml_ticket_view_tab_messages" name="inchoo_ticket_view_tab_messages">
+                    <block type="inchoo_tickets/adminhtml_ticket_view_message" name="inchoo_ticket_view_message" template="inchoo/ticket/view/message.phtml" />
+                </block>
                 <action method="addTab"><name>info_tab</name><block>inchoo_ticket_view_tab_info</block></action>
                 <action method="addTab"><name>view_tab</name><block>inchoo_ticket_view_tab_messages</block></action>
             </block>

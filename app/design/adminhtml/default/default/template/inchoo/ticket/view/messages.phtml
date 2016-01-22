@@ -10,9 +10,12 @@
                     <strong><?php echo $this->formatDate($_message->getCreatedAt(), 'medium') ?></strong>
                     <?php echo $this->formatTime($_message->getCreatedAt()) ?><span class="separator">|</span>
                     <small><?php echo $_message->getAdminId() ? $this->getAdminFirstname($_message->getAdminId()) : $this->helper('sales')->__('Customer') ?></small>
-                        <br/><?php echo $_message->getMessage() ?>
+                    <br/><?php echo $_message->getMessage() ?>
                 </li>
             <?php endforeach; ?>
         </ul>
     </fieldset>
+</div>
+<div class="entry-edit">
+    <?php echo $this->getChildHtml('inchoo_ticket_view_message') ?>
 </div>
