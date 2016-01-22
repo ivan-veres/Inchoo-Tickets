@@ -30,7 +30,6 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Wi
                 'header'    => Mage::helper('inchoo_tickets')->__('ID'),
                 'width'     => '50px',
                 'align'     => 'right',
-                'filter_index'=> 'rt.ticket_index',
                 'index'     => 'ticket_id'
             ));
         $this->addColumn('created_at',

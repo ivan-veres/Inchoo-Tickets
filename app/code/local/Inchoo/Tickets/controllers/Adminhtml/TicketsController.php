@@ -25,16 +25,11 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $this->renderLayout();
     }
 
-
-
     public function viewAction()
     {
         $ticket = $this->_initTicket();
-
         $this->loadLayout();
-
         $this->_title(sprintf("#%s", $ticket->getTicketId()));
-
         $this->renderLayout();
     }
 
