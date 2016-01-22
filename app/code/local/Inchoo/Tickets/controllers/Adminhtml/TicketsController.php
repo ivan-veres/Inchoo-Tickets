@@ -40,4 +40,37 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
             $this->getLayout()->createBlock('inchoo_tickets/adminhtml_ticket_grid')->toHtml()
         );
     }
+
+    public function closeAction()
+    {
+        $_session = Mage::getSingleton('adminhtml/session');
+        $ticketId = $this->getRequest()->getParam('ticket_id');
+        if ($ticketId > 0) {
+            try {
+                $currentTime = Varien_Date::now();
+                Mage::getModel('inchoo_tickets/tickets')->load($ticketId)
+                    ->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_DISABLED)
+                    ->setClosedAt($currentTime)
+                    ->save();
+                $_session->addSuccess(
+                    Mage::helper('inchoo_tickets')->__('Ticket was successfully closed.')
+                );
+                $this->_redirect('*/*/');
+                return;
+            } catch (Mage_Core_Exception $e) {
+                $_session->addError($e->getMessage());
+                $this->_redirect('*/*/view', array('ticket_id' => $ticketId));
+            } catch (Exception $e) {
+                Mage::logException($e);
+                $_session->addError(
+                    Mage::helper('inchoo_tickets/tickets')->__('There was an error closing the ticket.')
+                );
+                $this->_redirect('*/*/view', array('ticket_id' => $ticketId));
+                return;
+            }
+        }
+        $_session->addError(
+            Mage::helper('inchoo_tickets/tickets')->__('Could not find the ticket.')
+        );
+    }
 }
