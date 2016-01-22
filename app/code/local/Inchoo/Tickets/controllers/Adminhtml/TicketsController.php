@@ -25,7 +25,7 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $this->renderLayout();
     }
 
-    
+
 
     public function viewAction()
     {
