@@ -9,22 +9,30 @@
             <div class="hor-scroll">
                 <table cellspacing="0" class="form-list">
                     <tr>
-                        <td class="label"><label><?php echo Mage::helper('inchoo_tickets')->__('Customer Name') ?></label></td>
+                        <td class="label">
+                            <label><?php echo Mage::helper('inchoo_tickets')->__('Customer Name') ?></label></td>
                         <td class="value"><strong><?php echo $this->escapeHtml($this->getCustomer()) ?></strong></td>
                     </tr>
                     <tr>
                         <td class="label"><label><?php echo Mage::helper('inchoo_tickets')->__('Status') ?></label></td>
-                        <td class="value"><strong><?php echo $_ticket->getStatus() ? 'Opened' : 'Closed' ?></strong></td>
+                        <td class="value"><strong><?php echo $_ticket->getStatus() ? 'Opened' : 'Closed' ?></strong>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="label"><label><?php echo Mage::helper('inchoo_tickets')->__('Date Created') ?></label></td>
-                        <td class="value"><strong><?php echo $this->formatDate($_ticket->getCreatedAt(), 'medium', true) ?></strong></td>
+                        <td class="label">
+                            <label><?php echo Mage::helper('inchoo_tickets')->__('Date Created') ?></label></td>
+                        <td class="value">
+                            <strong><?php echo $this->formatDate($_ticket->getCreatedAt(), 'medium', true) ?></strong>
+                        </td>
                     </tr>
                     <?php if (!$_ticket->getStatus()): ?>
-                    <tr>
-                        <td class="label"><label><?php echo Mage::helper('inchoo_tickets')->__('Date Closed') ?></label></td>
-                        <td class="value"><strong><?php echo $this->formatDate($_ticket->getClosedAt(), 'medium', true) ?></strong></td>
-                    </tr>
+                        <tr>
+                            <td class="label">
+                                <label><?php echo Mage::helper('inchoo_tickets')->__('Date Closed') ?></label></td>
+                            <td class="value">
+                                <strong><?php echo $this->formatDate($_ticket->getClosedAt(), 'medium', true) ?></strong>
+                            </td>
+                        </tr>
                     <?php endif; ?>
                 </table>
             </div>

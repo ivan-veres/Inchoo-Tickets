@@ -7,18 +7,9 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
     protected $_ticket;
 
     public function _construct()
-{
-    parent::_construct();
-    $this->setTemplate('inchoo/ticket/view/messages.phtml');
-}
-
-    public function getTicket()
     {
-        if (!$this->_ticket) {
-            return $this->_ticket = Mage::registry('current_ticket');
-        }
-
-        return $this->_ticket;
+        parent::_construct();
+        $this->setTemplate('inchoo/ticket/view/messages.phtml');
     }
 
     public function getTicketMessages()
@@ -30,10 +21,19 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
         return $messages;
     }
 
+    public function getTicket()
+    {
+        if (!$this->_ticket) {
+            return $this->_ticket = Mage::registry('current_ticket');
+        }
+
+        return $this->_ticket;
+    }
+
     public function getTicketCreator()
     {
         $creator = Mage::getModel('customer/customer')
-        ->load($this->getTicket()->getCustomerId());
+            ->load($this->getTicket()->getCustomerId());
 
         return $creator;
     }

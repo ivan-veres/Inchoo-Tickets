@@ -16,10 +16,27 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    protected function _getSession()
+    {
+        return Mage::getSingleton('customer/session');
+    }
+
+    public function viewAction()
+    {
+        $this->loadLayout();
+
+        if (!$this->_initTicket()) {
+            $this->_redirect('tickets');
+            return;
+        }
+
+        $this->renderLayout();
+    }
+
     protected function _initTicket($ticketId = null)
     {
         if (null === $ticketId) {
-            $ticketId = (int) $this->getRequest()->getParam('ticket_id');
+            $ticketId = (int)$this->getRequest()->getParam('ticket_id');
         }
 
         if (!$ticketId) {
@@ -43,23 +60,12 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
         $websiteId = Mage::app()->getWebsite()->getId();
         $customerId = Mage::getSingleton('customer/session')->getCustomerId();
         if ($ticket->getTicketId() && $ticket->getCustomerId() && ($customerId === $ticket->getCustomerId())
-                && ($ticket->getWebsiteId() === $websiteId)) {
+            && ($ticket->getWebsiteId() === $websiteId)
+        ) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public function viewAction()
-    {
-        $this->loadLayout();
-
-        if (!$this->_initTicket()) {
-            $this->_redirect('tickets');
-            return;
-        }
-
-        $this->renderLayout();
     }
 
     public function newAction()
@@ -143,10 +149,5 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
 
         $this->_redirect('*/');
         return;
-    }
-
-    protected function _getSession()
-    {
-        return Mage::getSingleton('customer/session');
     }
 }

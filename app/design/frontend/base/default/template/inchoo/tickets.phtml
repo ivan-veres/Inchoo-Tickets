@@ -1,18 +1,19 @@
-
 <?php $_tickets = $this->getTickets(); ?>
 <div class="page-title title-buttons">
     <h1><?php echo $this->__('My Tickets') ?></h1>
-    <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add New Ticket')) ?>" class="button" onclick="window.location='<?php echo $this->getNewTicketUrl() ?>';"><span><span><?php echo $this->__('Add New Ticket') ?></span></span></button>
+    <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add New Ticket')) ?>"
+            class="button" onclick="window.location='<?php echo $this->getNewTicketUrl() ?>';">
+        <span><span><?php echo $this->__('Add New Ticket') ?></span></span></button>
 </div>
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <?php echo $this->getPagerHtml(); ?>
 <table class="data-table orders" id="my-orders-table">
-    <col width="1" />
-    <col width="1" />
-    <col />
-    <col width="1" />
-    <col width="1" />
-    <col width="1" />
+    <col width="1"/>
+    <col width="1"/>
+    <col/>
+    <col width="1"/>
+    <col width="1"/>
+    <col width="1"/>
     <thead>
     <tr>
         <th class="number"><?php echo $this->__('Ticket #') ?></th>
@@ -33,7 +34,8 @@
             <td class="total a-center"><?php echo $_ticket->getStatus() ? 'Opened' : 'Closed'; ?></td>
             <td class="status a-center"><?php echo $_ticket->getClosedAt() ? $this->formatDate($_ticket->getClosedAt()) : '-'; ?></td>
             <td class="a-center view">
-                <span class="nobr"><a href="<?php echo $this->getViewUrl($_ticket) ?>"><?php echo $this->__('View Ticket') ?></a></span>
+                <span class="nobr"><a
+                        href="<?php echo $this->getViewUrl($_ticket) ?>"><?php echo $this->__('View Ticket') ?></a></span>
             </td>
         </tr>
     <?php endforeach; ?>

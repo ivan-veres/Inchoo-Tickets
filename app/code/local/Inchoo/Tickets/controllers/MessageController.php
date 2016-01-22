@@ -16,6 +16,11 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    protected function _getSession()
+    {
+        return Mage::getSingleton('customer/session');
+    }
+
     public function newAction()
     {
         $this->loadLayout();
@@ -66,10 +71,5 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
             }
         }
         $this->_redirectReferer();
-    }
-
-    protected function _getSession()
-    {
-        return Mage::getSingleton('customer/session');
     }
 }

@@ -3,20 +3,6 @@
 
 class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controller_Action
 {
-    public function _initTicket()
-    {
-        $id = $this->getRequest()->getParam('ticket_id');
-        $ticket = Mage::getModel('inchoo_tickets/tickets')->load($id);
-
-        if (!$ticket->getId()) {
-            $this->_getSession()->addError($this->__('This ticket no longer exists.'));
-            $this->_redirect('*/*/');
-            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
-            return false;
-        }
-        Mage::register('current_ticket', $ticket);
-        return $ticket;
-    }
     public function indexAction()
     {
         $this->_title($this->__('Tickets'))->_title($this->__('Tickets Inchoo'));
@@ -31,6 +17,21 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $this->loadLayout();
         $this->_title(sprintf("#%s", $ticket->getTicketId()));
         $this->renderLayout();
+    }
+
+    public function _initTicket()
+    {
+        $id = $this->getRequest()->getParam('ticket_id');
+        $ticket = Mage::getModel('inchoo_tickets/tickets')->load($id);
+
+        if (!$ticket->getId()) {
+            $this->_getSession()->addError($this->__('This ticket no longer exists.'));
+            $this->_redirect('*/*/');
+            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
+            return false;
+        }
+        Mage::register('current_ticket', $ticket);
+        return $ticket;
     }
 
     public function gridAction()
@@ -78,24 +79,24 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
     public function messagePostAction()
     {
         if ($_ticket = $this->_initTicket()) {
-           try {
-               $data = $this->getRequest()->getPost();
-               $message = Mage::getModel('inchoo_tickets/messages')->setData($data);
-               $currentTime = Varien_Date::now();
+            try {
+                $data = $this->getRequest()->getPost();
+                $message = Mage::getModel('inchoo_tickets/messages')->setData($data);
+                $currentTime = Varien_Date::now();
 
-               $message->setTicketId($_ticket->getTicketId())
-                   ->setAdminId(Mage::getSingleton('admin/session')->getUser()->getUserId())
-                   ->setCreatedAt($currentTime)
-                   ->save();
+                $message->setTicketId($_ticket->getTicketId())
+                    ->setAdminId(Mage::getSingleton('admin/session')->getUser()->getUserId())
+                    ->setCreatedAt($currentTime)
+                    ->save();
 
-               $this->loadLayout('empty');
-               $this->renderLayout();
-           } catch (Mage_Core_Exception $e) {
-               Mage::logException($e->getMessage());
-           } catch (Exception $e) {
-               Mage::getSingleton('adminhtml/session')
-                   ->addError($e->getMessage());
-           }
+                $this->loadLayout('empty');
+                $this->renderLayout();
+            } catch (Mage_Core_Exception $e) {
+                Mage::logException($e->getMessage());
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')
+                    ->addError($e->getMessage());
+            }
         }
     }
 }

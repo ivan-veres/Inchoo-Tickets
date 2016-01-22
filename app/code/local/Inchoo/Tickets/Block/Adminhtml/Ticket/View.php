@@ -18,32 +18,24 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
         $_ticket = $this->getTicket();
 
         $this->_addButton('back', array(
-            'label'     => Mage::helper('adminhtml')->__('Back'),
-            'onclick'   => "setLocation('{$this->getUrl('*/*/')}')",
-            'class'     => 'back',
+            'label' => Mage::helper('adminhtml')->__('Back'),
+            'onclick' => "setLocation('{$this->getUrl('*/*/')}')",
+            'class' => 'back',
         ));
 
         if ($_ticket->canClose()) {
             $this->_addButton('close', array(
-                'label'     => Mage::helper('adminhtml')->__('Close'),
-                'class'     => 'delete',
-                'onclick'   => 'deleteConfirm(\''
+                'label' => Mage::helper('adminhtml')->__('Close'),
+                'class' => 'delete',
+                'onclick' => 'deleteConfirm(\''
                     . Mage::helper('core')->jsQuoteEscape(
                         Mage::helper('adminhtml')->__('Are you sure you want to do this?')
                     )
-                    .'\', \''
+                    . '\', \''
                     . $this->getCloseUrl()
                     . '\')',
             ));
         }
-    }
-
-    protected function _beforeToHtml()
-    {
-        $ticket = $this->getTicket();
-        $this->_headerText = Mage::helper('inchoo_tickets')->__('Ticket #%s - %s', $ticket->getTicketId(), $ticket->getSubject());
-        $this->setViewHtml('<div id="' . $this->getDestElementId() . '"></div>');
-        return parent::_beforeToHtml();
     }
 
     public function getTicket()
@@ -54,6 +46,14 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
     protected function getCloseUrl()
     {
         return $this->getUrl('*/*/close', array('ticket_id' => $this->getTicket()->getTicketId()));
+    }
+
+    protected function _beforeToHtml()
+    {
+        $ticket = $this->getTicket();
+        $this->_headerText = Mage::helper('inchoo_tickets')->__('Ticket #%s - %s', $ticket->getTicketId(), $ticket->getSubject());
+        $this->setViewHtml('<div id="' . $this->getDestElementId() . '"></div>');
+        return parent::_beforeToHtml();
     }
 
 }

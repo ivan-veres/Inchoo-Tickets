@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this Mage_Core_Model_Resource_Setup*/
+/* @var $this Mage_Core_Model_Resource_Setup */
 
 $this->startSetup();
 
@@ -14,7 +14,7 @@ $table = $this->getConnection()
             'identity' => true,
             'unsigned' => true,
             'nullable' => false,
-            'primary'  => true,
+            'primary' => true,
         ), 'Id')
     ->addColumn(
         'customer_id',
@@ -52,7 +52,7 @@ $table = $this->getConnection()
         array(
             'unsigned' => true,
             'nullable' => false,
-            'default'  => '0',
+            'default' => '0',
         ), 'Store ID')
     ->addColumn(
         'created_at',
@@ -84,7 +84,7 @@ $table = $this->getConnection()
             'identity' => true,
             'unsigned' => true,
             'nullable' => false,
-            'primary'  => true,
+            'primary' => true,
         ), 'Reply ID')
     ->addColumn(
         'ticket_id',
