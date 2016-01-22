@@ -28,4 +28,12 @@
             </block>
         </reference>
     </adminhtml_tickets_view>
+
+    <adminhtml_tickets_messagepost>
+        <block type="inchoo_tickets/adminhtml_ticket_view_tab_messages" name="inchoo_ticket_view_tab_messages" template="inchoo/ticket/view/messages.phtml"
+               output="toHtml">
+            <block type="inchoo_tickets/adminhtml_ticket_view_message" name="inchoo_ticket_view_message"
+                   template="inchoo/ticket/view/message.phtml"/>
+        </block>
+    </adminhtml_tickets_messagepost>
 </layout>

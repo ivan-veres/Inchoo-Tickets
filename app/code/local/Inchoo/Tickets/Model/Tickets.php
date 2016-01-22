@@ -40,7 +40,7 @@ class Inchoo_Tickets_Model_Tickets extends Mage_Core_Model_Abstract
 
     public function canReply()
     {
-        if ($this->getStatus()) {
+        if (!$this->getStatus()) {
             return false;
         }
         return true;

@@ -74,4 +74,28 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
             Mage::helper('inchoo_tickets/tickets')->__('Could not find the ticket.')
         );
     }
+
+    public function messagePostAction()
+    {
+        if ($_ticket = $this->_initTicket()) {
+           try {
+               $data = $this->getRequest()->getPost();
+               $message = Mage::getModel('inchoo_tickets/messages')->setData($data);
+               $currentTime = Varien_Date::now();
+
+               $message->setTicketId($_ticket->getTicketId())
+                   ->setAdminId(Mage::getSingleton('admin/session')->getUser()->getUserId())
+                   ->setCreatedAt($currentTime)
+                   ->save();
+
+               $this->loadLayout('empty');
+               $this->renderLayout();
+           } catch (Mage_Core_Exception $e) {
+               Mage::logException($e->getMessage());
+           } catch (Exception $e) {
+               Mage::getSingleton('adminhtml/session')
+                   ->addError($e->getMessage());
+           }
+        }
+    }
 }
