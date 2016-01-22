@@ -44,6 +44,7 @@ $table = $this->getConnection()
         1,
         array(
             'nullable' => false,
+            'default'  => '1',
         ), 'Status')
     ->addColumn(
         'website_id',
