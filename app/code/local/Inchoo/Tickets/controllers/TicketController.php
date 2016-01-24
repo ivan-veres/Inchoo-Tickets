@@ -127,9 +127,9 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
         $_ticket = Mage::getModel('inchoo_tickets/tickets')->load($ticketId);
 
 
-        if (!$ticketId) {
+        if (!$ticketId || $_ticket->getCustomerId() !== Mage::getSingleton('customer/session')->getId()) {
             $session->addError($this->__('Unable to close ticket!'));
-            $this->_redirect('*/*/');
+            $this->_redirect('tickets');
             return;
         }
 
@@ -142,7 +142,7 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
                 $session->addSuccess($this->__('Ticket #%s has been closed.', $_ticket->getTicketId()));
             } catch (Exception $e) {
                 $session->addError($this->__('Something went wrong.'));
-                $this->_redirect('*/*/');
+                $this->_redirect('tickets');
                 return;
             }
         }

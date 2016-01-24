@@ -1,8 +1,10 @@
+<?php $_ticket = $this->getTicket() ?>
+
 <div class="page-title">
     <h1>Reply to ticket</h1>
 </div>
 <?php echo $this->getMessagesBlock()->toHtml() ?>
-<form action="<?php echo $this->getFormSaveMessageUrl() ?>" method="post" id="message-form">
+<form action="<?php echo $this->getFormSaveMessageUrl($_ticket) ?>" method="post" id="message-form">
     <div class="fieldset">
         <?php echo $this->getBlockHtml('formkey') ?>
         <input type="hidden" name="success_url" value="<?php //echo $this->getSuccessUrl() ?>"/>

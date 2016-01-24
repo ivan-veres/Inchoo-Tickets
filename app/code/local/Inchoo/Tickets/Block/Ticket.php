@@ -39,7 +39,7 @@ class Inchoo_Tickets_Block_Ticket extends Mage_Core_Block_Template
 
     public function getNewMessageurl()
     {
-        return $this->getUrl('*/message/new', array('_secure' => true));
+        return $this->getUrl('*/message/new', array('ticket_id' => $this->getTicket()->getTicketId()));
     }
 
     public function getReplyUrl()
@@ -67,9 +67,9 @@ class Inchoo_Tickets_Block_Ticket extends Mage_Core_Block_Template
         return Mage::getUrl('tickets/ticket/newPost', array('_secure' => true));
     }
 
-    public function getFormSaveMessageUrl()
+    public function getFormSaveMessageUrl($ticket)
     {
-        return Mage::getUrl('tickets/message/newPost', array('_secure' => true));
+        return Mage::getUrl('tickets/message/newPost', array('ticket_id' => $ticket->getTicketId()));
     }
 
     public function getBackUrl()

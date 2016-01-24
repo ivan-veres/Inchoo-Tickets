@@ -16,6 +16,41 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    protected function _initTicket($ticketId = null)
+    {
+        if (null === $ticketId) {
+            $ticketId = (int)$this->getRequest()->getParam('ticket_id');
+        }
+
+        if (!$ticketId) {
+            $this->_redirect('tickets');
+            return false;
+        }
+
+        $ticket = Mage::getModel('inchoo_tickets/tickets')->load($ticketId);
+
+        if ($this->_canViewTicket($ticket)) {
+            Mage::register('current_ticket', $ticket);
+            Mage::getSingleton('customer/session')->setTicket($ticket);
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    protected function _canViewTicket($ticket)
+    {
+        $websiteId = Mage::app()->getWebsite()->getId();
+        $customerId = Mage::getSingleton('customer/session')->getCustomerId();
+        if ($ticket->getTicketId() && $ticket->getCustomerId() && ($customerId === $ticket->getCustomerId())
+            && ($ticket->getWebsiteId() === $websiteId)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     protected function _getSession()
     {
         return Mage::getSingleton('customer/session');
@@ -26,6 +61,11 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
         $this->loadLayout();
 
         $this->_initLayoutMessages('customer/session');
+
+        if (!$this->_initTicket()) {
+            $this->_redirect('*/*/');
+            return;
+        }
 
         $this->renderLayout();
     }
@@ -40,6 +80,7 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
         if ($this->getRequest()->isPost()) {
             $customer = Mage::getSingleton('customer/session')->getCustomer();
             $session = Mage::getSingleton('core/session');
+            $_ticketId = $this->getRequest()->getParam('ticket_id');
             $data = $this->getRequest()->getPost();
             $message = Mage::getModel('inchoo_tickets/messages')->setData($data);
 
@@ -47,7 +88,7 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
 
             if (true === $validate) {
                 try {
-                    $_ticket = Mage::getSingleton('customer/session')->getTicket();
+                    $_ticket = Mage::getModel('inchoo_tickets/tickets')->load($_ticketId);
                     $currentTime = Varien_Date::now();
                     $message->setCustomerID($customer->getId())
                         ->setTicketId($_ticket->getTicketId())
