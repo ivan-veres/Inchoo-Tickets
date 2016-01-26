@@ -10,7 +10,7 @@
                     <strong><?php echo $this->formatDate($_message->getCreatedAt(), 'medium') ?></strong>
                     <?php echo $this->formatTime($_message->getCreatedAt()) ?><span class="separator">|</span>
                     <small><?php echo $_message->getAdminId() ? $this->getAdminFirstname($_message->getAdminId()) : $this->helper('sales')->__('Customer') ?></small>
-                    <br/><?php echo $_message->getMessage() ?>
+                    <br/><?php echo $this->escapeHtml($_message->getMessage()) ?>
                 </li>
             <?php endforeach; ?>
         </ul>

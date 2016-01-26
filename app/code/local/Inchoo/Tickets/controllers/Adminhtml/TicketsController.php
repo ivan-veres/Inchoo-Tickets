@@ -7,6 +7,7 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
     {
         $this->_title($this->__('Tickets'))->_title($this->__('Tickets Inchoo'));
         $this->loadLayout();
+        $this->_setActiveMenu('customer/inchoo_tickets');
         $this->_addContent($this->getLayout()->createBlock('inchoo_tickets/adminhtml_ticket'));
         $this->renderLayout();
     }
@@ -15,6 +16,7 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
     {
         $ticket = $this->_initTicket();
         $this->loadLayout();
+        $this->_setActiveMenu('customer/inchoo_tickets');
         $this->_title(sprintf("#%s", $ticket->getTicketId()));
         $this->renderLayout();
     }
@@ -98,5 +100,38 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
                     ->addError($e->getMessage());
             }
         }
+    }
+
+    public function reopenAction()
+    {
+        $_session = Mage::getSingleton('adminhtml/session');
+        $_ticketId = $this->getRequest()->getParam('ticket_id');
+
+        if ($_ticketId) {
+            try {
+                Mage::getModel('inchoo_tickets/tickets')->load($_ticketId)
+                    ->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_ENABLED)
+                    ->setClosedAt(null)
+                    ->save();
+                $_session->addSuccess(
+                    Mage::helper('inchoo_tickets')->__('Ticket #%s was successfully reopened.', $_ticketId)
+                );
+                $this->_redirect('*/*/view', array('ticket_id' => $_ticketId));
+                return;
+            } catch (Mage_Core_Exception $e) {
+                $_session->addError($e->getMessage());
+                $this->_redirect('*/*/view', array('ticket_id' => $_ticketId));
+            } catch (Exception $e) {
+                Mage::logException($e);
+                $_session->addError(
+                    Mage::helper('inchoo_tickets')->__('There was an error opening the ticket.')
+                );
+                $this->_redirect('*/*/view', array('ticket_id' => $_ticketId));
+                return;
+            }
+        }
+        $_session->addError(
+            Mage::helper('inchoo_tickets')->__('Could not find the ticket.')
+        );
     }
 }

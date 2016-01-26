@@ -36,6 +36,14 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
                     . '\')',
             ));
         }
+
+        if (!$_ticket->canClose()) {
+            $this->_addButton('reopen', array(
+                'label' => Mage::helper('adminhtml')->__('Reopen'),
+                'class' => 'go',
+                'onclick' => "setLocation('{$this->getReopenUrl()}')",
+                ));
+        }
     }
 
     public function getTicket()
@@ -48,12 +56,19 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View extends Mage_Adminhtml_Block_Wi
         return $this->getUrl('*/*/close', array('ticket_id' => $this->getTicket()->getTicketId()));
     }
 
+    protected function getReopenUrl()
+    {
+        return $this->getUrl('*/*/reopen', array('ticket_id' => $this->getTicket()->getTicketId()));
+    }
+
     protected function _beforeToHtml()
     {
         $ticket = $this->getTicket();
-        $this->_headerText = Mage::helper('inchoo_tickets')->__('Ticket #%s - %s', $ticket->getTicketId(), $ticket->getSubject());
+        $this->_headerText = Mage::helper('inchoo_tickets')->__('Ticket #%s - %s', $ticket->getTicketId(), $this->escapeHtml($ticket->getSubject()));
         $this->setViewHtml('<div id="' . $this->getDestElementId() . '"></div>');
         return parent::_beforeToHtml();
     }
+
+
 
 }

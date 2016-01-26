@@ -3,11 +3,7 @@
 class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Info extends Mage_Adminhtml_Block_Template
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
-    public function _construct()
-    {
-        parent::_construct();
-        $this->setTemplate('inchoo/ticket/view/info.phtml');
-    }
+
 
     public function getCustomer()
     {

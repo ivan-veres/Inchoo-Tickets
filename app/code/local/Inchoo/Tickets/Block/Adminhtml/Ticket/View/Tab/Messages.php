@@ -6,12 +6,6 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
 {
     protected $_ticket;
 
-    public function _construct()
-    {
-        parent::_construct();
-        $this->setTemplate('inchoo/ticket/view/messages.phtml');
-    }
-
     public function getTicketMessages()
     {
         $messages = Mage::getModel('inchoo_tickets/messages')->getCollection()
