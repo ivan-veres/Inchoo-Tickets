@@ -79,7 +79,7 @@ class Inchoo_Tickets_Block_Ticket extends Mage_Core_Block_Template
 
     public function getBackToTicketUrl()
     {
-        return $this->getUrl('tickets/ticket/view', array('_secure' => true, 'ticket_id' => Mage::getSingleton('customer/session')->getTicket()->getTicketId()));
+        return $this->getUrl('tickets/ticket/view', array('_secure' => true, 'ticket_id' => $this->getTicket()->getTicketId()));
     }
 
     protected function getMessages()
