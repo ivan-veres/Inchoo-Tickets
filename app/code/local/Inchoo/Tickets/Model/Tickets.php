@@ -6,6 +6,9 @@ class Inchoo_Tickets_Model_Tickets extends Mage_Core_Model_Abstract
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
 
+    protected $_eventPrefix = 'inchoo_tickets_ticket';
+    protected $_eventObject = 'ticket';
+
     public function validate()
     {
         $errors = array();
