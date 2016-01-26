@@ -22,6 +22,9 @@
 
     <inchoo_tickets_ticket_view>
         <update handle="customer_account"/>
+        <reference name="customer_account_navigation">
+            <action method="setActive" module="inchoo_tickets"><path>inchoo_tickets/index/index</path></action>
+        </reference>
         <reference name="my.account.wrapper">
             <block type="inchoo_tickets/ticket" name="tickets" template="inchoo/ticket/view.phtml"/>
         </reference>
@@ -32,12 +35,18 @@
         <reference name="my.account.wrapper">
             <block type="inchoo_tickets/ticket" name="tickets" template="inchoo/form/ticket.phtml"/>
         </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive" module="inchoo_tickets"><path>inchoo_tickets/index/index</path></action>
+        </reference>
     </inchoo_tickets_ticket_new>
 
     <inchoo_tickets_message_new>
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
             <block type="inchoo_tickets/ticket" name="tickets" template="inchoo/form/message.phtml"/>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive" module="inchoo_tickets"><path>inchoo_tickets/index/index</path></action>
         </reference>
     </inchoo_tickets_message_new>
 

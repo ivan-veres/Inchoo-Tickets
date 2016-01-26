@@ -48,7 +48,6 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
 
         if ($this->_canViewTicket($ticket)) {
             Mage::register('current_ticket', $ticket);
-            Mage::getSingleton('customer/session')->setTicket($ticket);
         } else {
             return false;
         }
@@ -94,10 +93,8 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
 
             if (true === $validate) {
                 try {
-                    $currentTime = Varien_Date::now();
                     $ticket->setCustomerID($customer->getId())
                         ->setStatus(Inchoo_Tickets_Model_Tickets::STATUS_ENABLED)
-                        ->setCreatedAt($currentTime)
                         ->setWebsiteId(Mage::app()->getWebsite()->getId())
                         ->save();
 

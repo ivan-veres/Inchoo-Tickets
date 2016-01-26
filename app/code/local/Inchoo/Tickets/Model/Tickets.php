@@ -45,4 +45,14 @@ class Inchoo_Tickets_Model_Tickets extends Mage_Core_Model_Abstract
     {
         $this->_init('inchoo_tickets/tickets');
     }
+
+    protected function _beforeSave()
+    {
+        parent::_beforeSave();
+        $now = Mage::getSingleton('core/date')->gmtDate();
+        if($this->isObjectNew()) {
+            $this->setCreatedAt($now);
+        }
+        return $this;
+    }
 }

@@ -31,7 +31,6 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
 
         if ($this->_canViewTicket($ticket)) {
             Mage::register('current_ticket', $ticket);
-            Mage::getSingleton('customer/session')->setTicket($ticket);
         } else {
             return false;
         }
@@ -89,13 +88,13 @@ class Inchoo_Tickets_MessageController extends Mage_Core_Controller_Front_Action
             if (true === $validate) {
                 try {
                     $_ticket = Mage::getModel('inchoo_tickets/tickets')->load($_ticketId);
-                    $currentTime = Varien_Date::now();
                     $message->setCustomerID($customer->getId())
                         ->setTicketId($_ticket->getTicketId())
-                        ->setCreatedAt($currentTime)
                         ->save();
 
                     $session->addSuccess($this->__('You replied to ticket #') . $_ticket->getTicketId());
+                    $this->_redirect('*/ticket/view', array('ticket_id' => $_ticket->getTicketId()));
+                    return;
                 } catch (Exception $e) {
                     $session->setFormData($data);
                     $session->addError($this->__('Unable to submit message.'));

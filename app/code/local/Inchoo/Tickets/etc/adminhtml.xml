@@ -11,4 +11,20 @@
             </children>
         </customer>
     </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <customer>
+                        <children>
+                            <inchoo_tickets translate="title" module="inchoo_tickets">
+                                <title>Inchoo Tickets</title>
+                            </inchoo_tickets>
+                        </children>
+                    </customer>
+
+                </children>
+            </admin>
+        </resources>
+    </acl>
 </config>
