@@ -102,6 +102,8 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
                         ->save();
 
                     $session->addSuccess($this->__('Your ticket has been submitted.'));
+                    $this->_redirect('tickets');
+                    return;
                 } catch (Exception $e) {
                     $session->setFormData($data);
                     $session->addError($this->__('Unable to submit message.'));

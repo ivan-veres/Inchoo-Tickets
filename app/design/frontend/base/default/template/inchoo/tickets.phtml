@@ -30,7 +30,7 @@
         <tr>
             <td class="number"><?php echo $_ticket->getTicketId() ?></td>
             <td class="date"><span class="nobr"><?php echo $this->formatDate($_ticket->getCreatedAt()) ?></span></td>
-            <td class="ship"><?php echo $_ticket->getSubject(); ?></td>
+            <td class="ship"><?php echo $this->escapeHtml($_ticket->getSubject()); ?></td>
             <td class="total a-center"><?php echo $_ticket->getStatus() ? 'Opened' : 'Closed'; ?></td>
             <td class="status a-center"><?php echo $_ticket->getClosedAt() ? $this->formatDate($_ticket->getClosedAt()) : '-'; ?></td>
             <td class="a-center view">
