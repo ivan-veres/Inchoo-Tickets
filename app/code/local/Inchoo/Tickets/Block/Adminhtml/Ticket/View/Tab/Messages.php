@@ -63,6 +63,6 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Tab_Messages extends Mage_Admin
 
     public function getTabClass()
     {
-        return 'ajax only';
+        return 'ajax';
     }
 }

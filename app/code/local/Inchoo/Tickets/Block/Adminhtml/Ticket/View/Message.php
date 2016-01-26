@@ -4,7 +4,7 @@ class Inchoo_Tickets_Block_Adminhtml_Ticket_View_Message extends Mage_Adminhtml_
 {
     protected function _prepareLayout()
     {
-        $onclick = "submitAndReloadArea($('ticket_view'), '" . $this->getSubmitUrl() . "')";
+        $onclick = "submitAndReloadArea($('inchoo_ticket_view_tabs_view_tab_content'), '" . $this->getSubmitUrl() . "')";
         $button = $this->getLayout()->createBlock('adminhtml/widget_button')
             ->setData(array(
                 'label' => Mage::helper('sales')->__('Submit Message'),
