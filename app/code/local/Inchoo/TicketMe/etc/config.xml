@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <modules>
+        <Inchoo_TicketMe>
+            <version>1.0.0.0</version>
+        </Inchoo_TicketMe>
+    </modules>
+    <frontend>
+        <events>
+            <inchoo_tickets_ticket_safe_after>
+                <observers>
+                    <class>inchoo_ticketMe/observer</class>
+                    <method>sendEmailNotificationToAdmin</method>
+                </observers>
+            </inchoo_tickets_ticket_safe_after>
+        </events>
+    </frontend>
+</config>

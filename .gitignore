@@ -43,4 +43,6 @@
 /app/skin/*
 !/app/skin/Inchoo
 !.gitignore
+!/app/etc/modules/Inchoo_TicketMe.xml
+!/app/code/local/Inchoo/TicketMe
 

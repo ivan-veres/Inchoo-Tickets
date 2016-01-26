@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <modules>
+        <Inchoo_TicketMe>
+            <active>1</active>
+            <codePool>local</codePool>
+            <depends>
+                <Inchoo_Tickets />
+            </depends>
+        </Inchoo_TicketMe>
+    </modules>
+</config>
