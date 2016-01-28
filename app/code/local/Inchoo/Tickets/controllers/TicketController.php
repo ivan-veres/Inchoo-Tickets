@@ -140,6 +140,7 @@ class Inchoo_Tickets_TicketController extends Mage_Core_Controller_Front_Action
                     ->save();
                 $session->addSuccess($this->__('Ticket #%s has been closed.', $_ticket->getTicketId()));
             } catch (Exception $e) {
+                Mage::logException($e);
                 $session->addError($this->__('Something went wrong.'));
                 $this->_redirect('tickets');
                 return;

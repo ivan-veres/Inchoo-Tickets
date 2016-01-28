@@ -1,6 +1,15 @@
 /*
 !/app
 /app/*
+!/app/locale
+/app/locale/*
+!/app/locale/en_US
+/app/locale/en_US/*
+!/app/locale/en_US/template
+/app/locale/en_US/template/*
+!/app/locale/en_US/template/email
+/app/locale/en_US/template/email/*
+!/app/locale/en_US/template/email/inchoo
 !/app/code
 /app/code/*
 !/app/code/local

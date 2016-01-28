@@ -5,14 +5,39 @@
             <version>1.0.0.0</version>
         </Inchoo_TicketMe>
     </modules>
-    <frontend>
+    <global>
+        <helpers>
+            <inchoo_ticketme>
+                <class>Inchoo_TicketMe_Helper</class>
+            </inchoo_ticketme>
+        </helpers>
         <events>
-            <inchoo_tickets_ticket_safe_after>
+            <inchoo_tickets_ticket_save_after>
                 <observers>
-                    <class>inchoo_ticketMe/observer</class>
-                    <method>sendEmailNotificationToAdmin</method>
+                    <inchoo_ticketme>
+                        <class>Inchoo_TicketMe_Model_Observer</class>
+                        <method>send</method>
+                    </inchoo_ticketme>
                 </observers>
-            </inchoo_tickets_ticket_safe_after>
+            </inchoo_tickets_ticket_save_after>
         </events>
-    </frontend>
+        <template>
+            <email>
+                <inchoo_ticketme_new_ticket_admin_email_template translate="label">
+                    <label>Admin Ticket</label>
+                    <file>inchoo/admin_ticket.html</file>
+                    <type>html</type>
+                </inchoo_ticketme_new_ticket_admin_email_template>
+            </email>
+        </template>
+    </global>
+    <default>
+        <inchoo_ticketme>
+            <ticket>
+                <status>1</status>
+                <template>inchoo_ticketme_new_ticket_admin_email_template</template>
+                <email><![CDATA[admin@example.com]]></email>
+            </ticket>
+        </inchoo_ticketme>
+    </default>
 </config>
